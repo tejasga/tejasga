@@ -65,6 +65,26 @@ select stu_id,
             end as grade
 from student_marks;
 
+*---uber interview question
+
+create table tree 
+(
+    node int,
+    parent INT
+);          
+
+insert into tree values (5,8),(9,8),(4,5),(2,9),(1,5),(3,9),(8,null);
+
+SELECT * from tree;
+
+select node,
+       CASE 
+            WHEN node not in (SELECT DISTINCT parent from tree where parent is not null)then 'LEAF'
+            WHEN parent is null then 'ROOT'
+            else 'INNER'
+        END as node_type
+from tree;            
+
 
 
 
