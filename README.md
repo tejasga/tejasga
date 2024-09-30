@@ -86,6 +86,31 @@ select node,
 from tree;            
 
 
+*---example for case when with group by -amazone question
+
+CREATE table transactions
+(
+    trx_date DATE,
+    merchant_id VARCHAR(10),
+    amount int,
+    payment_mode VARCHAR(10)
+);
+
+insert into transactions values('2022-04-02','m1',150,'cash');
+insert into transactions values('2022-04-02','m1',500,'online');
+insert into transactions values('2022-04-03','m2',450,'online');
+insert into transactions values('2022-04-03','m1',100,'cash');
+insert into transactions values('2022-04-03','m3',600,'cash');
+insert into transactions values('2022-04-05','m5',200,'online');
+insert into transactions values('2022-04-05','m2',100,'online');
+
+select * from transactions;
+
+select merchant_id,
+       sum(case when payment_mode + 'cash' then amount else 0 end) as cash_amount,
+       sum(case when payment_mode='online'then amount else 0 end) as cash_amount
+from transactions group by merchant_id;
+
 
 
 
