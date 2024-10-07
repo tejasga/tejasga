@@ -111,6 +111,39 @@ select merchant_id,
        sum(case when payment_mode='online'then amount else 0 end) as cash_amount
 from transactions group by merchant_id;
 
+-- Active: 1721212360747@@127.0.0.1@3306
+CREATE DATABASE test1;
+
+use test1;
+
+CREATE TABLE  employees
+(
+    emp_id int,
+    emp_name VARCHAR(50),
+    mobile BIGINT,
+    dept_name VARCHAR(50),
+    salary int
+);
+
+INSERT INTO employees values(1,'tejas',9545531185,'software',1000);
+INSERT INTO employees values(1,'rahul',8830448114,'IT',2000);
+INSERT INTO employees values(1,'abhay',9545752820,'HR',5000);
+INSERT INTO employees values(1,'nikhil',7558595456,'IT',3000);
+
+SELECT * FROM employees;
+
+---**create views** **in sql****
+create VIEW employees_data_for_finance as SELECT emp_id,emp_name,salary from employees
+
+SELECT * from employees_data_for_finance;
+----create logic for department wise salary sum
+create view department_wise_salary as SELECT dept_name, sum(salary) from employees group by dept_name;
+
+DROP VIEW department_wise_salary;
+
+create view department_wise_salary as SELECT dept_name, sum(salary)as total_salary from employees group by dept_name;
+
+select * FROM department_wise_salary;
 
 
 
